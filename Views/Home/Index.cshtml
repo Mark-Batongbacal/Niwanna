@@ -17,7 +17,10 @@
             <form method="post" asp-action="Add" class="row g-2 align-items-end">
                 <div class="col-sm-3">
                     <label class="form-label">Name</label>
-                    <input type="text" name="Name" class="form-control" placeholder="Mark / Anna" required>
+                    <select name="Name" class="form-select" required>
+                        <option value="Mark">Mark</option>
+                        <option value="Anna">Anna</option>
+                    </select>
                 </div>
                 <div class="col-sm-3">
                     <label class="form-label">Amount</label>
@@ -31,6 +34,7 @@
                     <button type="submit" class="btn btn-primary w-100">Add</button>
                 </div>
             </form>
+
         </div>
     </div>
 
