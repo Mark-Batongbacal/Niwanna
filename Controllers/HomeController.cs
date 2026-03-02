@@ -10,7 +10,7 @@ namespace Niwanna.Controllers
     public class HomeController : Controller
     {
         private readonly IponContext _context;
-        private const string Passcode = "ipon2026";
+        private const string Passcode = "120219";
         private const string CookieName = "IponAuth";
 
         public HomeController(IponContext context)
