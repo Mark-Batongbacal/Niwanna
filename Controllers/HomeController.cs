@@ -30,6 +30,14 @@ namespace Niwanna.Controllers
             return View(ipon);
         }
 
+        [HttpGet("/ping")]
+        public IActionResult Ping()
+        {
+            Console.WriteLine("Ping received at " + DateTime.Now);
+            return Ok("pong");
+        }
+
+
         [HttpGet]
         public IActionResult Login()
         {
