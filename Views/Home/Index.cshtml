@@ -1,0 +1,62 @@
+﻿@model Niwanna.Models.Ipon
+@{
+    ViewBag.Title = "Ipon Tracker";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Ipon Tracker</h1>
+        <h2 class="text-success">Total: ₱@Model.Total</h2>
+    </div>
+
+    <!-- Add Contribution Form -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="post" asp-action="Add" class="row g-2 align-items-end">
+                <div class="col-sm-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="Name" class="form-control" placeholder="Mark / Anna" required>
+                </div>
+                <div class="col-sm-3">
+                    <label class="form-label">Amount</label>
+                    <input type="number" name="Amount" class="form-control" placeholder="₱" required>
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label">Note (optional)</label>
+                    <input type="text" name="Note" class="form-control" placeholder="Labew">
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary w-100">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- History Table -->
+    <h3>History</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Note</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var entry in Model.Entries)
+                {
+                    <tr>
+                        <td>@entry.Name</td>
+                        <td>₱@entry.Amount</td>
+                        <td>@entry.Note</td>
+                        <td>@entry.Date.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
