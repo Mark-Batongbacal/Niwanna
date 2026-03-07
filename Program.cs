@@ -1,3 +1,4 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using Niwanna.Data;
 
@@ -8,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services
 builder.Services.AddControllersWithViews();
 
-// Add EF Core with SQLite
 builder.Services.AddDbContext<IponContext>(options =>
-    options.UseSqlite("Data Source=ipon.db"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 var app = builder.Build();
 
