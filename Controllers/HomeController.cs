@@ -51,7 +51,7 @@ namespace Niwanna.Controllers
             {
                 Response.Cookies.Append(CookieName, Passcode, new CookieOptions
                 {
-                    Expires = DateTimeOffset.UtcNow.AddDays(30)
+                    Expires = DateTimeOffset.UtcNow.AddDays(10000)
                 });
                 return RedirectToAction("Index");
             }
@@ -72,6 +72,12 @@ namespace Niwanna.Controllers
                 _context.Ipons.Add(ipon);
                 _context.SaveChanges();
             }
+
+            if (string.IsNullOrWhiteSpace(Note))
+            {
+                Note = "N/A";
+            }
+
 
             var entry = new IponEntry
             {

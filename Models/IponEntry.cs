@@ -7,7 +7,7 @@ namespace Niwanna.Models
         public int IponEntryId { get; set; }
         public string Name { get; set; }
         public int Amount { get; set; }
-        public string Note { get; set; }
+        public string Note { get; set; } = String.Empty;
         public DateTime Date { get; set; } = DateTime.Now;
 
         // Foreign key
