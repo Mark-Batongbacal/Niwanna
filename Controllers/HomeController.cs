@@ -92,5 +92,19 @@ namespace Niwanna.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult Remove(int entryId)
+        {
+            var entry = _context.Entries.Find(entryId);
+            if (entry == null) return NotFound();
+
+            _context.Entries.Remove(entry);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

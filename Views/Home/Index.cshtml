@@ -12,9 +12,9 @@
     </div>
 
     <!-- Add Contribution Form -->
-    <div class="card mb-4">
+    <div class="card mb-4 shadow-sm">
         <div class="card-body">
-            <form method="post" asp-action="Add" class="row g-2 align-items-end">
+            <form method="post" asp-action="Add" class="row g-3 align-items-end">
                 <div class="col-sm-3">
                     <label class="form-label">Name</label>
                     <select name="Name" class="form-select" required>
@@ -34,30 +34,39 @@
                     <button type="submit" class="btn btn-primary w-100">Add</button>
                 </div>
             </form>
-
         </div>
     </div>
 
     <!-- History Table -->
     <h3>History</h3>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
+    <div class="table-responsive shadow-sm">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
                 <tr>
                     <th>Name</th>
                     <th>Amount</th>
                     <th>Note</th>
                     <th>Date</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var entry in Model.Entries)
+                @foreach (var entry in Model.Entries.OrderByDescending(e => e.Date))
                 {
                     <tr>
                         <td>@entry.Name</td>
                         <td>₱@entry.Amount</td>
-                        <td>@entry.Note</td>
-                        <td>@entry.Date.ToLocalTime().ToString()</td>
+                        <td>@(string.IsNullOrWhiteSpace(entry.Note) ? "N/A" : entry.Note)</td>
+                        <td>@entry.Date.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            <form method="post" asp-action="Remove" class="d-inline">
+                                <input type="hidden" name="entryId" value="@entry.IponEntryId" />
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this entry?');">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 }
             </tbody>
