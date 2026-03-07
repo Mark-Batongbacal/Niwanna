@@ -1,6 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Niwanna.Data;
+using Niwanna.Models;
 
 
 
@@ -13,12 +14,15 @@ builder.Services.AddDbContext<IponContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
+
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<IponContext>();
+    db.Database.Migrate();
+}
 
-using var scope = app.Services.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<IponContext>();
-db.Database.EnsureCreated(); // <-- auto-creates tables if missing
 
 app.UseStaticFiles();
 app.UseRouting();
